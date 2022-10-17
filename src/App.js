@@ -3,27 +3,25 @@ import api from "./api";
 
 class App extends Component {
   state = {
-    filmes: [],
+    obras: [],
   };
 
   async componentDidMount() {
-    const response = await api.get("star%20wars");
+    const response = await api.get("/obra/todas");
 
-    this.setState({ filmes: response.data });
+    this.setState({ obras: response.data });
   }
 
   render() {
-    const { filmes } = this.state;
+    const { obras } = this.state;
 
     return (
       <div>
-        <h1>Listar os filmes</h1>
-        {filmes.map((filme) => (
-          <li key={filme.show.id}>
-            <h2>
-              {filme.show.name}
-            </h2>
-            <p>{filme.show.url}</p>
+        <h1>Lista de obras: </h1>
+        {obras.map((obra) => (
+          <li key={obra.id}>
+            <p>{obra.titulo}</p>
+            <p>{obra.autor}</p>
           </li>
         ))}
       </div>
